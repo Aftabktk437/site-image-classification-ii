@@ -120,3 +120,4 @@ if __name__ == "__main__":
     
     # Filter and save top 10 high-resolution images
     filter_and_save_top_images(output_folder, "output/high_resolution_images")
+

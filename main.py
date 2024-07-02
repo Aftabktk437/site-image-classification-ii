@@ -2,7 +2,6 @@ import fitz  # PyMuPDF
 from PIL import Image
 import io
 import os
-import re
 
 # Define the keywords for each category
 categories_keywords = {
@@ -94,20 +93,20 @@ def filter_and_save_top_images(base_folder, output_folder):
     # Sort the images by resolution in descending order
     images_info.sort(key=lambda x: x[1], reverse=True)
 
-    # Select the top 5 images with the highest resolution
-    top_5_images = images_info[:5]
+    # Select the top 10 images with the highest resolution
+    top_10_images = images_info[:10]
 
     # Define the folder to save the selected images
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    # Copy the top 5 images to the new folder
-    for i, (image_path, resolution) in enumerate(top_5_images, start=1):
+    # Copy the top 10 images to the new folder
+    for i, (image_path, resolution) in enumerate(top_10_images, start=1):
         img = Image.open(image_path)
         output_path = os.path.join(output_folder, f"high_res_image_{i}.png")
         img.save(output_path)
 
-    print("Top 5 high-resolution images have been saved in the 'high_resolution_images' folder.")
+    print("Top 10 high-resolution images have been saved in the 'high_resolution_images' folder.")
 
 if __name__ == "__main__":
     pdf_path = "SiteSurvey_GLI_RIY0023_PA20230329000100_71583.pdf"
@@ -119,5 +118,5 @@ if __name__ == "__main__":
     # Save images to categorized folders
     save_images(images, output_folder)
     
-    # Filter and save top 5 high-resolution images
+    # Filter and save top 10 high-resolution images
     filter_and_save_top_images(output_folder, "output/high_resolution_images")
